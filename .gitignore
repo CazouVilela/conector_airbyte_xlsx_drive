@@ -8,3 +8,20 @@ __pycache__/
 .env.local
 dist/
 build/
+
+# Python
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+.eggs/
+
+# Airbyte
+secrets/
+normalized_data/
+sample_files/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/

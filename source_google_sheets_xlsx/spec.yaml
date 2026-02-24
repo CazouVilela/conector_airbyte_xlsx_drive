@@ -1,0 +1,33 @@
+documentationUrl: https://docs.airbyte.com/integrations/sources/google-sheets-xlsx
+connectionSpecification:
+  $schema: http://json-schema.org/draft-07/schema#
+  title: Google Sheets XLSX Source Spec
+  type: object
+  required:
+    - credentials_json
+    - spreadsheet_id
+  additionalProperties: true
+  properties:
+    credentials_json:
+      type: string
+      title: Service Account JSON
+      description: >-
+        Contents of the service account JSON key file.
+        The service account must have read access to the target file in Google Drive.
+      airbyte_secret: true
+      order: 0
+    spreadsheet_id:
+      type: string
+      title: Spreadsheet/File ID
+      description: >-
+        The ID of the Google Sheets or XLSX file in Google Drive.
+        This is the long string in the URL between /d/ and /edit.
+      order: 1
+    names_conversion:
+      type: boolean
+      title: Sanitize Column Names
+      description: >-
+        When enabled, column names are converted to lowercase with underscores,
+        accents removed, and made SQL-safe.
+      default: true
+      order: 2
