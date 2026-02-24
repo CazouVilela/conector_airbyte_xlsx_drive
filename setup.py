@@ -14,7 +14,7 @@ TEST_REQUIREMENTS = [
 
 setup(
     name="source_google_sheets_xlsx",
-    version="1.0.0",
+    version="1.1.0",
     description="Airbyte source connector for Google Sheets and XLSX files on Google Drive.",
     author="GrupoHub",
     author_email="dev@grupohub.com.br",

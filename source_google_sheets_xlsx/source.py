@@ -63,8 +63,21 @@ def _emit_record(stream: str, data: dict, emitted_at: int) -> None:
     })
 
 
-def _emit_state(data: dict) -> None:
-    _emit({"type": "STATE", "state": {"data": data}})
+def _emit_stream_state(stream_name: str, namespace: str | None = None) -> None:
+    """Emit a per-stream state message (Airbyte protocol >= 0.2.0)."""
+    stream_descriptor = {"name": stream_name}
+    if namespace:
+        stream_descriptor["namespace"] = namespace
+    _emit({
+        "type": "STATE",
+        "state": {
+            "type": "STREAM",
+            "stream": {
+                "stream_descriptor": stream_descriptor,
+                "stream_state": {},
+            },
+        },
+    })
 
 
 # ---------------------------------------------------------------------------
@@ -431,8 +444,7 @@ class SourceGoogleSheetsXlsx:
                 _emit_record(stream.name, record, emitted_at)
                 count += 1
             _log("INFO", f"Stream '{stream.name}': {count} records emitted")
-
-        _emit_state(state or {})
+            _emit_stream_state(stream.name)
 
     def _build_streams(self, config: dict) -> list[GoogleSheetsStream]:
         credentials_json = config["credentials_json"]
