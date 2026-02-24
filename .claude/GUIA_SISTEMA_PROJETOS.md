@@ -1,0 +1,1 @@
+/home/cazouvilela/projetos/IDE_customizada/.claude/GUIA_SISTEMA_PROJETOS.md
